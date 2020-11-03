@@ -21,6 +21,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+     <!--linking firebase for database-->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+
+    <style>
+      ul#ladyhydraparkreview-list li{
+        background-color: grey;
+        margin: 5px;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      li 
+    </style>
+
   </head>
 
   <!--Body Part-->
@@ -43,19 +58,13 @@
             <a href="/tourism.html" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
             <a href="/tourism.html#popular_places" class="nav-link">Popular Places</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">Services</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Historical Places</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Blog</a>
+            <a href="/blog/blog.html" class="nav-link">Blog</a>
           </li>
           <li class="nav-item">
             <a href="/contactUs/contact_us.html" class="nav-link">Contact Us</a>
@@ -99,5 +108,56 @@
         </div>
         </section>
     <!--End Of Details Section-->
+
+        
+    <center><h2>Review this place.</h2></center>
+
+   
+<div class="container_review">
+    <h5><b>Create Review</b></h5>
+    <div class="row">
+      <div class="col-lg-2">
+      <img src="/images/Lady_Hydari_Park.jpg" style="width: 150px;height: 100px;"/>
+      </div>
+      <div class="col-lg-10 mt-lg-4" >
+        <h6>Lady Hydra Park</h6>
+      </div>
+    </div>
+  <hr/>
+    <div class="card">
+      <div class="card-body">
+        <div class="form-group">
+          <label for="review_heading">Add a headline</label>
+          <input type="text"
+          class="form-control"
+          placeholder="What's most important to know?"
+          id="reviewHeadingLadyHydraPark"
+          required
+          />
+        </div>
+        <div class="form-group">
+          <label for="review_heading">Add a written review</label>
+          <textarea
+          placeholder="What did you like or dislike about Lady Hydra Park? Write here..."
+          cols="30"
+          rows="4"
+          class="form-control"
+          id="reviewContentLadyHydraPark"
+          required
+        ></textarea>
+        </div>
+        <button type="submit" value="review" onclick="ladyHydraPark()">Submit</button>
+        </div>
+    </div>
+</div>
+
+<div class="container_review">
+<h4 class="ml-2">REVIEWS:</h4>
+  <ul id="ladyhydraparkreview-list"></ul>
+  </div>
+
+  
+  <script src="lady_hydra_park.js"></script>
+
     </body>
 </html>

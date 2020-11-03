@@ -42,18 +42,15 @@ function renderReviewShillongPeak(doc){
   let shillongpeak = document.createElement('h6');
   let headingShillongPeak = document.createElement('b');
   let contentShillongPeak = document.createElement('p');
-  let createdAtShillongPeak = document.createElement('span');
 
   li.setAttribute('data-id',doc.id);
   shillongpeak.textContent = "Shillong Peak: ";
   headingShillongPeak.textContent ="Title: "+ doc.data().heading;
   contentShillongPeak.textContent = doc.data().content;
-  createdAtShillongPeak.textContent ="Date of published: "+ doc.data().createdAt;
 
   li.appendChild(shillongpeak);
   li.appendChild(headingShillongPeak);
   li.appendChild(contentShillongPeak);
-  li.appendChild(createdAtShillongPeak);
 
   ShillongPeakPostList.appendChild(li);
 }

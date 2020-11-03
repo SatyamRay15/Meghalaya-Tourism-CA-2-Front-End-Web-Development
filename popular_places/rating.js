@@ -40,18 +40,15 @@ function renderReviewLivingRootBridge(doc){
   let livingrootbridge = document.createElement('h6');
   let heading = document.createElement('b');
   let content = document.createElement('p');
-  let createdAt = document.createElement('span');
 
   li.setAttribute('data-id',doc.id);
   livingrootbridge.textContent = "Living Root Bridge:";
   heading.textContent ="Title: "+ doc.data().heading;
   content.textContent = doc.data().content;
-  createdAt.textContent ="Date of published: "+ doc.data().createdAt;
 
   li.appendChild(livingrootbridge);
   li.appendChild(heading);
   li.appendChild(content);
-  li.appendChild(createdAt);
 
   postList.appendChild(li);
 }
