@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!--linking css external file -->
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/main.css">
 
     <!--linking fontawesome link-->
     <script src="https://kit.fontawesome.com/1c15c31927.js" crossorigin="anonymous"></script>
@@ -17,13 +17,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!--linking bootstrap-->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--linking firebase for database-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+
+    
+
   </head>
 
   <!--Body Part-->
@@ -53,14 +59,75 @@
             <a href="#" class="nav-link">Services</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">About</a>
+            <a href="blog/blog.html" class="nav-link">Blog</a>
           </li>
           <li class="nav-item">
             <a href="contactUs/contact_us.html" class="nav-link">Contact Us</a>
           </li>
+          <li class="nav-item">
+           
+            <button onclick="document.getElementById('modal1').style.display='block'" style="width:auto;" class="btn-primary" id="login">Login</button>
+         
+            <!--SignIn Form-->
+            <div id="modal1" class="modal">
+              <div class="modal-content animate">
+              <form id="login-form">
+                <div class="imgcontainer">
+                  <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+            
+                <div class="container">
+                  <label ><b>Email</b></label>
+                  <input type="text" placeholder="Enter your email" name="email" id="email" required>
+            
+                  <label ><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                    
+                  <button type="submit" class="btn-block" onclick="signIn()">Login</button>
+                </div>
+            
+                <div class="container" style="background-color:#f1f1f1">
+                  <button type="button" onclick="document.getElementById('modal1').style.display='none'" class="cancelbtn">Cancel</button>
+                  <span class="psw"><button onclick="document.getElementById('id02').style.display='block',document.getElementById('modal1').style.display='none'">Not a member? Register Now</button></span>
+                </div>
+              </form>
+            </div>
+            </div>
+
+            <!--SignUp Form-->
+            <div id="id02" class="modal">
+              <div class="modal-content animate">
+              <form id="signup-form">
+                <div class="imgcontainer">
+                  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+            
+                <div class="container">
+                  <label ><b>Name</b></label>
+                  <input type="text" placeholder="Enter your full name" name="name" id="name" required>
+                  <label ><b>Email</b></label>
+                  <input type="text" placeholder="Enter your email" name="email" id="email_1" required>
+            
+                  <label ><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" name="password" id="password_1" required>
+                    
+                  <button type="submit" class="btn-block" onclick="signup()">SignUp</button>
+                </div>
+            
+                <div class="container" style="background-color:#f1f1f1">
+                  <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+                  <span class="psw"><button onclick="document.getElementById('id01').style.display='block',document.getElementById('id02').style.display='none'">SignIn</button></span>
+                </div>
+              </form>
+            </div>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+           
+            <button onclick="logout()" style="width:auto;" class="btn-primary" id="logout">Logout</button>
+         </li>
+          
         </ul>
       </div>
     </nav>
@@ -75,12 +142,11 @@
             <div class="text">
               <h1 class="mb-4 text-capitalize">find a perfect deal<br>for your next trip
               </h1>
-              <p style="font-size: 18px;">Lorem ipsum dolor sit amet consectetur adipisicing elit.<br/> A nisi eveniet ad qui totam. Excepturi.</p>
               <a href="#" class="btn btn-hero py-3 px-3">View all</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 d-flex ">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1842634.279059726!2d90.18960623110289!3d25.575157319741262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x37507e8f34bd207f%3A0xf5ef6117f496d6e!2sMeghalaya!5e0!3m2!1sen!2sin!4v1603983435590!5m2!1sen!2sin" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1842634.279059726!2d90.18960623110289!3d25.575157319741262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x37507e8f34bd207f%3A0xf5ef6117f496d6e!2sMeghalaya!5e0!3m2!1sen!2sin!4v1603983435590!5m2!1sen!2sin" width="300" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
           </div>
         </div>
       </div>
@@ -93,7 +159,8 @@
     <section class="about-section mt-5">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-6 text-center heading-section mb-5">
+          <div class="col-lg-6 text-center heading-section mb-5 p-4" style="border: 5px solid gray;
+          margin: 0;">
             <h2 class="text-black mb-2">Welcome To Meghalaya</h2>
             <p>Meghalaya is a state in northeastern India. The state is bounded to the south by the Bangladeshi divisions of Mymensingh and Sylhet, to the west by the Bangladeshi division of Rangpur, and to the north and east by India's State of Assam. The capital of Meghalaya is Shillong.</p>
           </div>
@@ -104,7 +171,7 @@
           <div class="12">
             <div class="row">
               <div class="mb-4 margin-lg-0 col-lg-6 order-lg-2">
-                <a href="#" class="effect">
+                <a href="popular_places/living_root_bridge.html" class="effect">
                   <img src="images/meghalaya_root.jpg" alt="meghalaya" class="img-fluid">
                 </a>
               </div>
@@ -123,7 +190,7 @@
           <div class="12">
             <div class="row">
               <div class="mb-4 margin-lg-0 col-lg-6 ">
-                <a href="#" class="effect">
+                <a href="popular_places/shillong_peak.html" class="effect">
                   <img src="images/shillong-peak.jpg" alt="meghalaya" class="img-fluid">
                 </a>
               </div>
@@ -142,7 +209,7 @@
           <div class="12">
             <div class="row">
               <div class="mb-4 margin-lg-0 col-lg-6 order-lg-2">
-                <a href="#" class="effect">
+                <a href="popular_places/umiam_lake.html" class="effect">
                   <img src="images/hero2.jpg" alt="meghalaya" class="img-fluid">
                 </a>
               </div>
@@ -161,7 +228,7 @@
           <div class="12">
             <div class="row">
               <div class="mb-4 margin-lg-0 col-lg-6 ">
-                <a href="#" class="effect">
+                <a href="popular_places/dawki.html" class="effect">
                   <img src="images/Meghalaya (1).jpg" alt="meghalaya" class="img-fluid">
                 </a>
               </div>
@@ -180,7 +247,7 @@
           <div class="12">
             <div class="row">
               <div class="mb-4 margin-lg-0 col-lg-6 order-lg-2">
-                <a href="#" class="effect">
+                <a href="popular_places/krangsuri_falls.html" class="effect">
                   <img src="images/Meghalaya-3.jpg" alt="meghalaya" class="img-fluid">
                 </a>
               </div>
@@ -199,7 +266,7 @@
           <div class="12">
             <div class="row">
               <div class="mb-4 margin-lg-0 col-lg-6 ">
-                <a href="#" class="effect">
+                <a href="popular_places/laitlum.html" class="effect">
                   <img src="images/Laitlum-Copy.jpg" alt="meghalaya" class="img-fluid">
                 </a>
               </div>
@@ -328,7 +395,8 @@
   <!--Heading section-->
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-6 text-center heading-section mb-4">
+      <div class="col-lg-6 text-center heading-section mb-4 p-4" style="border: 5px solid gray;
+      margin: 0;">
         <h2 class="text-black mb-2">Meghalaya Festivals</h2>
         <p>Meghalaya a small State in the North Eastern part of India is where you'll find more than just thunderclouds and a vast green landscape. Its people are the soul, and its song and dance the vital source of joy. This ancient people have perfected the art of life and is being passed on to its young. In Modern times though the people are engaged in secondary and tertiary activities, the festivals are always celebrated with great pomp and gaiety. </p>
       </div>
@@ -370,7 +438,7 @@
       </div>
     </div>
     <a href="festivals/festivals_culture.html" class="p-2" style="text-decoration: none;">
-      <button type="button" class="btn btn-primary btn-block">See All Festivals</button>
+      <button type="button" class="btn btn-primary btn-block">See All Festivals And Tribes Of Meghalaya</button>
     </a>
   </div>
   <br/>
@@ -411,5 +479,29 @@
 </footer>
 <!--End Of Footer Section-->
 
+<!--script import in this section-->
+<script src="script.js"></script>
+
+<script>
+   // Get the modal
+ var modal = document.getElementById('modal1');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+      // Get the modal
+ var modal = document.getElementById('id02');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
   </body>
 </html>
