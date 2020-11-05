@@ -84,7 +84,7 @@
               <h1 class="mb-4 text-capitalize">Golf Link
               </h1>
               <p style="font-size: 18px;">Are you in Shillong, then do visit Golf Link.</p>
-              <a href="#" class="btn btn-hero py-2 px-3">BOOK NOW</a>
+              <a href="/bookingAtrip/bookAtrip.html" class="btn btn-hero py-2 px-3">BOOK NOW</a>
             </div>
           </div>
         </div>
@@ -125,6 +125,13 @@
     <div class="card">
       <div class="card-body">
         <div class="form-group">
+          <label for="Name">Your Name</label>
+              <input type="text"
+              class="form-control"
+              placeholder="Type your name"
+              id="name"
+              required
+              />
           <label for="review_heading">Add a headline</label>
           <input type="text"
           class="form-control"
@@ -144,7 +151,7 @@
           required
         ></textarea>
         </div>
-        <button type="submit" value="review" onclick="golfLink()">Submit</button>
+        <button type="submit" value="review" onclick="validate()">Submit</button>
         </div>
     </div>
 </div>
@@ -156,6 +163,28 @@
 
   
   <script src="golf_link.js"></script>
+
+  <script>
+        function validate(){
+           var name = document.getElementById("name").value;
+          var heading = document.getElementById("reviewHeadingGolfLink").value;
+          var content = document.getElementById("reviewContentGolfLink").value;
+
+          if(name==""){
+            alert("Please fill up all the form fields before submitting. #name field");
+            return; 
+          }else if(heading == ""){
+            alert("Please fill up all the form fields before submitting. #heading field");
+            return; 
+          }else if(content == ""){
+            alert("Please fill up all the form fields before submitting. #content field");
+            return; 
+          }else{
+            golfLink();
+          }
+        }  
+        </script>
+        
 
     </body>
 </html>

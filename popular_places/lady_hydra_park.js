@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function ladyHydraPark(){
+  var name = document.getElementById("name").value;
   var headingLadyHydraPark = document.getElementById("reviewHeadingLadyHydraPark").value;
   var contentLadyHydraPark = document.getElementById("reviewContentLadyHydraPark").value;
 
   db.collection("LadyHydraPark").add({
+    name: name,
     heading: headingLadyHydraPark,
     content: contentLadyHydraPark,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const LadyHydraParkPostList = document.querySelector('#ladyhydraparkreview-list'
 function renderReviewLadyHydraPark(doc){
   let li = document.createElement('li');
   let LadyHydraPark = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingLadyHydraPark = document.createElement('b');
   let contentLadyHydraPark = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   LadyHydraPark.textContent = "Lady Hydra Park: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingLadyHydraPark.textContent ="Title: "+ doc.data().heading;
   contentLadyHydraPark.textContent = doc.data().content;
 
   li.appendChild(LadyHydraPark);
+  li.appendChild(name);
   li.appendChild(headingLadyHydraPark);
   li.appendChild(contentLadyHydraPark);
 
@@ -56,13 +61,12 @@ function renderReviewLadyHydraPark(doc){
 }
 
 db.collection('LadyHydraPark').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewLadyHydraPark(doc);
-    // totalReview(snapshot.docChanges());
     reviewLadyHydraPark.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

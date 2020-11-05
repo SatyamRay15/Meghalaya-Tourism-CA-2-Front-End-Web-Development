@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function donboscoChurch(){
+  var name = document.getElementById("name").value;
   var headingDonboscoChurch = document.getElementById("reviewHeadingDonboscoChurch").value;
   var contentDonboscoChurch = document.getElementById("reviewContentDonboscoChurch").value;
 
   db.collection("DonboscoChurch").add({
+    name: name,
     heading: headingDonboscoChurch,
     content: contentDonboscoChurch,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const DonboscoChurchPostList = document.querySelector('#donboscochurchreview-lis
 function renderReviewDonboscoChurch(doc){
   let li = document.createElement('li');
   let DonboscoChurch = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingDonboscoChurch = document.createElement('b');
   let contentDonboscoChurch = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   DonboscoChurch.textContent = "Donbosco Church: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingDonboscoChurch.textContent ="Title: "+ doc.data().heading;
   contentDonboscoChurch.textContent = doc.data().content;
 
   li.appendChild(DonboscoChurch);
+  li.appendChild(name);
   li.appendChild(headingDonboscoChurch);
   li.appendChild(contentDonboscoChurch);
 
@@ -56,13 +61,12 @@ function renderReviewDonboscoChurch(doc){
 }
 
 db.collection('DonboscoChurch').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewDonboscoChurch(doc);
-    // totalReview(snapshot.docChanges());
     reviewDonboscoChurch.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

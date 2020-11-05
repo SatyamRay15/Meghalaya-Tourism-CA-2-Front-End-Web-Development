@@ -126,6 +126,13 @@
         <div class="card">
           <div class="card-body">
             <div class="form-group">
+              <label for="Name">Your Name</label>
+              <input type="text"
+              class="form-control"
+              placeholder="Type your name"
+              id="name"
+              required
+              />
               <label for="review_heading">Add a headline</label>
               <input type="text"
               class="form-control"
@@ -145,7 +152,7 @@
               required
             ></textarea>
             </div>
-            <button type="submit" value="review" onclick="review()">Submit</button>
+            <button type="submit" value="review" onclick="validate()">Submit</button>
             </div>
         </div>
     </div>
@@ -157,8 +164,27 @@
       
 
         <script src="rating.js"></script>
-        
-        <script src="/script.js"></script>
+
+       <script>
+        function validate(){
+           var name = document.getElementById("name").value;
+          var heading = document.getElementById("reviewHeading").value;
+          var content = document.getElementById("reviewContent").value;
+
+          if(name==""){
+            alert("Please fill up all the form fields before submitting. #name field");
+            return; 
+          }else if(heading == ""){
+            alert("Please fill up all the form fields before submitting. #heading field");
+            return; 
+          }else if(content == ""){
+            alert("Please fill up all the form fields before submitting. #content field");
+            return; 
+          }else{
+            review();
+          }
+        }  
+        </script>
         
         
     </body>

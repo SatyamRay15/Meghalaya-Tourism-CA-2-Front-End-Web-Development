@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function umaimLake(){
+  var name = document.getElementById("name").value;
   var headingUmaimLake = document.getElementById("reviewHeadingUmiamLake").value;
   var contentUmaimLake = document.getElementById("reviewContentUmiamLake").value;
 
   db.collection("UmiamLake").add({
+    name: name,
     heading: headingUmaimLake,
     content: contentUmaimLake ,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const UmaimLakePostList = document.querySelector('#umaimlakereview-list');
 function renderReviewUmaimLake(doc){
   let li = document.createElement('li');
   let umaimlake = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingUmaimLake = document.createElement('b');
   let contentUmaimLake = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   umaimlake.textContent = "Umiam Lake: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingUmaimLake.textContent ="Title: "+ doc.data().heading;
   contentUmaimLake.textContent = doc.data().content;
 
   li.appendChild(umaimlake);
+  li.appendChild(name);
   li.appendChild(headingUmaimLake);
   li.appendChild(contentUmaimLake);
 
@@ -56,13 +61,12 @@ function renderReviewUmaimLake(doc){
 }
 
 db.collection('UmiamLake').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewUmaimLake(doc);
-    // totalReview(snapshot.docChanges());
     reviewUmiamLake.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function krangsuriFalls(){
+  var name = document.getElementById("name").value;
   var headingKrangsuriFalls = document.getElementById("reviewHeadingKrangsuriFalls").value;
   var contentKrangsuriFalls = document.getElementById("reviewContentKrangsuriFalls").value;
 
   db.collection("KrangsuriFalls").add({
+    name: name,
     heading: headingKrangsuriFalls,
     content: contentKrangsuriFalls ,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const KrangsuriFallsPostList = document.querySelector('#krangsuriFallsreview-lis
 function renderReviewKrangsuriFalls(doc){
   let li = document.createElement('li');
   let krangsuriFalls = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingKrangsuriFalls = document.createElement('b');
   let contentKrangsuriFalls = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   krangsuriFalls.textContent = "Krangsuri Falls: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingKrangsuriFalls.textContent ="Title: "+ doc.data().heading;
   contentKrangsuriFalls.textContent = doc.data().content;
 
   li.appendChild(krangsuriFalls);
+  li.appendChild(name);
   li.appendChild(headingKrangsuriFalls);
   li.appendChild(contentKrangsuriFalls);
 
@@ -56,13 +61,12 @@ function renderReviewKrangsuriFalls(doc){
 }
 
 db.collection('KrangsuriFalls').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewKrangsuriFalls(doc);
-    // totalReview(snapshot.docChanges());
     reviewKrangsuriFalls.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

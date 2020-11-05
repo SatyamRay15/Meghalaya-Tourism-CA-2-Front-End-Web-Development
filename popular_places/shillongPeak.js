@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function shillongPeak(){
+  var name = document.getElementById("name").value;
   var headingShillongPeak = document.getElementById("reviewHeadingShillongPeak").value;
   var contentShillongPeak = document.getElementById("reviewContentShillongPeak").value;
 
   db.collection("ShillongPeak").add({
+    name: name,
     heading: headingShillongPeak,
     content: contentShillongPeak ,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const ShillongPeakPostList = document.querySelector('#shillongpeakreview-list');
 function renderReviewShillongPeak(doc){
   let li = document.createElement('li');
   let shillongpeak = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingShillongPeak = document.createElement('b');
   let contentShillongPeak = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   shillongpeak.textContent = "Shillong Peak: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingShillongPeak.textContent ="Title: "+ doc.data().heading;
   contentShillongPeak.textContent = doc.data().content;
 
   li.appendChild(shillongpeak);
+  li.appendChild(name);
   li.appendChild(headingShillongPeak);
   li.appendChild(contentShillongPeak);
 
@@ -56,13 +61,12 @@ function renderReviewShillongPeak(doc){
 }
 
 db.collection('ShillongPeak').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewShillongPeak(doc);
-    // totalReview(snapshot.docChanges());
     reviewShillongPeak.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

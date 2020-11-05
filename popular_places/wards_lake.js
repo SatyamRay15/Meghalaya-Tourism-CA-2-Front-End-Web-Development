@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function wardsLake(){
+  var name = document.getElementById("name").value;
   var headingWardsLake = document.getElementById("reviewHeadingWardsLake").value;
   var contentWardsLake = document.getElementById("reviewContentWardsLake").value;
 
   db.collection("WardsLake").add({
+    name: name,
     heading: headingWardsLake,
     content: contentWardsLake,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const WardsLakePostList = document.querySelector('#wardslakereview-list');
 function renderReviewWardsLake(doc){
   let li = document.createElement('li');
   let WardsLake = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingWardsLake = document.createElement('b');
   let contentWardsLake = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   WardsLake.textContent = "Wards Lake: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingWardsLake.textContent ="Title: "+ doc.data().heading;
   contentWardsLake.textContent = doc.data().content;
 
   li.appendChild(WardsLake);
+  li.appendChild(name);
   li.appendChild(headingWardsLake);
   li.appendChild(contentWardsLake);
 
@@ -56,13 +61,12 @@ function renderReviewWardsLake(doc){
 }
 
 db.collection('WardsLake').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewWardsLake(doc);
-    // totalReview(snapshot.docChanges());
     reviewWardsLake.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

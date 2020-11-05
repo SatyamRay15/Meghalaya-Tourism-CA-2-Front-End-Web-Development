@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--title-->
+  <title>Meghalata Tourism</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!--linking css external file -->
+  <link rel="stylesheet" href="/main.css">
+
+  <!--linking fontawesome link-->
+  <script src="https://kit.fontawesome.com/1c15c31927.js" crossorigin="anonymous"></script>
+
+  <!--linking google fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!--linking bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--linking firebase for database-->
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+
+</head>
+<style>
+  .img-center{
+    margin-top: 40px;
+    margin-bottom: 5px;
+  }
+</style>
+
+<!--Body Part-->
+<body onload="bgphoto()"> 
+
+  <!--Navbar-->
+  
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="/tourism.html">Meghalaya Tourism</a>
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a href="/tourism.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/tourism.html#popular_places" class="nav-link">Popular Places</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item">
+          <a href="/blog/blog.html" class="nav-link">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a href="/contactUs/contact_us.html" class="nav-link">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--End of navbar-->
+
+
+     <!--Hero-Image-->
+      <div class="container">
+        <div class="text-white text-center bg-dark p-1" style="border-radius: 5px;">
+        <h2>You Missed This Beautiful Place.</h2></div>
+     <div class="row">
+       <div class="col-lg-6 col-md-6">
+        <div class="img-center text-center img-fluid">
+          <img src="/images/transaction-is-cancelled.jpg" alt="transaction was cancelled" class="rounded mx-auto" style="height: 200px;">
+        </div>
+       </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="img-center text-center img-fluid">
+            <img src="/images/cancelled.gif" alt="transaction was cancelled" class="rounded mx-auto" style="height: 250px;">
+          </div>
+        </div>
+       </div>
+       <div class="card">
+        <div class="card-body">
+       <div class="p-3">
+         <a href="/tourism.html" style="text-decoration: none;">
+        <div class="btn btn-secondary btn-block" ><b>Go Back To Home Page</b></div></a>
+      </div>
+    </div>
+  </div>
+</div>
+  <!--End of Hero-Image-->
+
+<script src="bookingAtrip.js"></script>
+<script>
+ 
+</script>
+</body>
+</html>

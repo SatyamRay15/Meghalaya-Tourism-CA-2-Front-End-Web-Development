@@ -21,7 +21,7 @@ function add(){
   var author=document.getElementById("author").value;
   var postTitle=document.getElementById("postTitle").value;
   var postContent=document.getElementById("postContent").value;
-  var postDate=document.getElementById("postDate").value;
+  var postDate=document.getElementById("visitDate").value;
 
   // Add a second document with a generated ID.
 db.collection("posts").add({

@@ -33,7 +33,7 @@
 
     <!--Navbar-->
     
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark" >
       <!-- Brand -->
       <a class="navbar-brand" href="/tourism.html">Meghalaya Tourism</a>
       <!-- Toggler/collapsibe Button -->
@@ -65,10 +65,9 @@
     <!--End of navbar-->
 
         <!-- <form>  -->
-          <div class="row" style="background-image: url('/images/booking_background.png');background-repeat: no-repeat;position: relative;background-size: cover;">
+          <div class="row" style="background-image: url(/images/golf_link_1.jpg);background-repeat: no-repeat;background-size: cover;">
                
-            <div class="col-lg-8">    
-            <main role="main">
+            <div class="col-lg-8">
             <div class="container">
               <div class="card m-4">
                 <div class="card-body">
@@ -77,6 +76,8 @@
                   <label for="place">Choose a place you want to visit in Meghalaya</label><br>
       
                   <select name="visited_places" id="place" required>
+                    <!-- <option value="">Select</option> -->
+                    <option value="">Select</option>
                     <option value="Dawki">Dawki</option>
                     <option value="Krangsuri Falls">Krangsuri Falls</option>
                     <option value="Laitlum Grand Canyon">Laitlum Grand Canyon</option>
@@ -169,6 +170,12 @@
                       id="NoOfPeople"
                       required
                     />
+                    <br/>
+                    <label for="payment_method">Payment Method</label>
+                    <select name="payment_method" id="payment_method" required>
+                      <option value="">Select</option>
+                      <option value="Cash">CASH</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-6">
@@ -178,21 +185,20 @@
                 </div>
                 </div>
                 <br>
-                 
+                 <br/>
                   <input
                     type="submit"
                     value="BOOK NOW"
-                    onclick="book()"
                     class="btn-lg btn-block btn-success"
-                    id="submitBtn"
+                    onclick="validate()"
                   />
                 
                 </div>
               </div>
             </div>
             <!-- /container -->
-          </main>
-        </div> 
+        </div>
+        
         <!-- </form> -->
         <div class="col-lg-4">
           <a href="/contactUs/contact_us.html" style="text-decoration: none;color: black;">
@@ -206,6 +212,52 @@
         </div> 
       </div>
   <script src="bookingAtrip.js"></script>  
-  
+  <script>
+    function validate(){
+      var places = document.getElementById("place").value;
+      var visitDate = document.getElementById("visitDate").value;
+      var FName = document.getElementById("FName").value;
+      var LName = document.getElementById("LName").value;
+      var Age = document.getElementById("Age").value;
+      var PNumber = document.getElementById("PNumber").value;
+      var Email = document.getElementById("Email").value;
+      var NumberOfPeople = document.getElementById("NoOfPeople").value;
+      var Cash = document.getElementById("payment_method").value; 
+
+      if(places == ""){
+        alert("Please fill up the fields. #Place field");
+        return;
+      }else if(visitDate == ""){
+        alert("Please fill up the fields. #Date field");
+        return;
+      }else if(FName == ""){
+        alert("Please fill up the fields. #First Name field");
+        return;
+      }else if(LName == ""){
+        alert("Please fill up the fields. #Last Name field");
+        return;
+      }else if(Age == ""){
+        alert("Please fill up the fields. #Age field");
+        return;
+      }else if(PNumber == ""){
+        alert("Please fill up the fields. #PNumber field");
+        return;
+      }else if(Email == ""){
+        alert("Please fill up the fields. #Email field");
+        return;
+      }else if(NumberOfPeople == ""){
+        alert("Please fill up the fields. #Number Of People field");
+        return;
+      }else if(Cash == ""){
+        alert("Please fill up the fields. #Cash field");
+        return;
+      }
+      else{
+        bookToConfirm();
+      }
+    }
+
+    
+  </script>
 </body>
 </html>

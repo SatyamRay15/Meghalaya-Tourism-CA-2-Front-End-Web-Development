@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function donboscoMuseum(){
+  var name = document.getElementById("name").value;
   var headingDonboscoMuseum = document.getElementById("reviewHeadingDonboscoMuseum").value;
   var contentDonboscoMuseum = document.getElementById("reviewContentDonboscoMuseum").value;
 
   db.collection("DonboscoMuseum").add({
+    name: name,
     heading: headingDonboscoMuseum,
     content: contentDonboscoMuseum,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const DonboscoMuseumPostList = document.querySelector('#donboscomuseumreview-lis
 function renderReviewDonboscoMuseum(doc){
   let li = document.createElement('li');
   let DonboscoMuseum = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingDonboscoMuseum = document.createElement('b');
   let contentDonboscoMuseum = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   DonboscoMuseum.textContent = "Donbosco Museum: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingDonboscoMuseum.textContent ="Title: "+ doc.data().heading;
   contentDonboscoMuseum.textContent = doc.data().content;
 
   li.appendChild(DonboscoMuseum);
+  li.appendChild(name);
   li.appendChild(headingDonboscoMuseum);
   li.appendChild(contentDonboscoMuseum);
 
@@ -56,13 +61,12 @@ function renderReviewDonboscoMuseum(doc){
 }
 
 db.collection('DonboscoMuseum').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewDonboscoMuseum(doc);
-    // totalReview(snapshot.docChanges());
     reviewDonboscoMuseum.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

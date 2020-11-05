@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function golfLink(){
+  var name = document.getElementById("name").value;
   var headingGolfLink = document.getElementById("reviewHeadingGolfLink").value;
   var contentGolfLink = document.getElementById("reviewContentGolfLink").value;
 
   db.collection("GolfLink").add({
+    name: name,
     heading: headingGolfLink,
     content: contentGolfLink,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const GolfLinkPostList = document.querySelector('#golflinkreview-list');
 function renderReviewGolfLink(doc){
   let li = document.createElement('li');
   let GolfLink = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingGolfLink = document.createElement('b');
   let contentGolfLink = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   GolfLink.textContent = "Golf Link: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingGolfLink.textContent ="Title: "+ doc.data().heading;
   contentGolfLink.textContent = doc.data().content;
 
   li.appendChild(GolfLink);
+  li.appendChild(name);
   li.appendChild(headingGolfLink);
   li.appendChild(contentGolfLink);
 
@@ -56,13 +61,12 @@ function renderReviewGolfLink(doc){
 }
 
 db.collection('GolfLink').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewGolfLink(doc);
-    // totalReview(snapshot.docChanges());
     reviewGolfLink.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

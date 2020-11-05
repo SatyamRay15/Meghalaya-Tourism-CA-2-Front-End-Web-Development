@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function dawki(){
+  var name = document.getElementById("name").value;
   var headingDawki = document.getElementById("reviewHeadingDawki").value;
   var contentDawki = document.getElementById("reviewContentDawki").value;
 
   db.collection("Dawki").add({
+    name: name,
     heading: headingDawki,
     content: contentDawki ,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const DawkiPostList = document.querySelector('#dawkireview-list');
 function renderReviewDawki(doc){
   let li = document.createElement('li');
   let dawki = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingDawki = document.createElement('b');
   let contentDawki = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   dawki.textContent = "Dawki: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingDawki.textContent ="Title: "+ doc.data().heading;
   contentDawki.textContent = doc.data().content;
 
   li.appendChild(dawki);
+  li.appendChild(name);
   li.appendChild(headingDawki);
   li.appendChild(contentDawki);
 
@@ -56,13 +61,12 @@ function renderReviewDawki(doc){
 }
 
 db.collection('Dawki').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewDawki(doc);
-    // totalReview(snapshot.docChanges());
     reviewDawki.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

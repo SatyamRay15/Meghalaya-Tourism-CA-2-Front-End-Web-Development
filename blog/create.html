@@ -129,7 +129,6 @@
     </nav>
     <!--End of navbar-->
     <!-- <form>  -->
-    <main role="main">
       <div class="container">
         <div class="card m-4">
           <div class="card-body">
@@ -138,6 +137,7 @@
             <label for="place">Choose a place you have visited in Meghalaya</label><br>
 
             <select name="visited_places" id="places" required>
+              <option value="">Select</option>
               <option value="Dawki">Dawki</option>
               <option value="Krangsuri Falls">Krangsuri Falls</option>
               <option value="Laitlum Grand Canyon">Laitlum Grand Canyon</option>
@@ -184,26 +184,58 @@
             </div>
             <div class="form-group">
               <label for="Date">Date of Visit</label>
-              <input type="date" class="form-control" id="postDate" required/>
+              <input type="date" class="form-control" id="visitDate" required/>
             </div>
 
-            <!-- <button type="submit" value="Post"  class="btn-block" id="submitBtn" onsubmit="add()">Post</button> -->
-            
-            <input
+            <!-- <input
               type="submit"
               value="Post"
-              onclick="add()"
+              
               class="btn-success btn-block"
+              onclick="validate()"
               id="submitBtn"
-            />
+            /> -->
+            <button type="submit" onclick="validate()" class="btn-md btn-success btn-block">Post</button>
           
           </div>
         </div>
       </div>
       <!-- /container -->
-    </main>
   <!-- </form> -->
 
   <script src="create.js"></script>
+
+  <script>
+    function validate(){
+      var places = document.getElementById("places").value;
+      var author = document.getElementById("author").value;
+      var postTitle = document.getElementById("postTitle").value;
+      var postContent = document.getElementById("postContent").value;
+      var visitDate = document.getElementById("visitDate").value;
+
+      if(places == ""){
+        alert("Please fill up the fields. #Place field");
+        return;
+      }else if(author == ""){
+        alert("Please fill up the fields. #Author field");
+        return;
+      }else if(postTitle == ""){
+        alert("Please fill up the fields. #Post Title field");
+        return;
+      }else if(postContent == ""){
+        alert("Please fill up the fields. #Post Content field");
+        return;
+      }else if(visitDate == ""){
+        alert("Please fill up the fields. #Visit Date field");
+        return;
+      }
+      else{
+        add();
+      }
+    }
+
+    
+  </script>
+
 </body>
 </html>

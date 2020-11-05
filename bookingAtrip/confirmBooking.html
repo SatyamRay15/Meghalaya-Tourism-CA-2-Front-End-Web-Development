@@ -26,10 +26,13 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
 
+    <!--Linking HTML to PDF cdn link-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
   </head>
 
   <!--Body Part-->
-  <body> 
+  <body  onload="fun()"> 
 
     <!--Navbar-->
     
@@ -66,21 +69,39 @@
 
 
        <!--Hero-Image-->
-     <section class="hero-wrap" style="background-image: url('/images/catholic-cathedral-shillong.jpg');position: fixed;">
+     <div class="hero-wrap" style="background-image: url('/images/catholic-cathedral-shillong.jpg');">
       <div class="overlay"></div>
+      <div class="card text-right">
+        <button class="btn btn-primary" id="download"><b>Download This File As PDF</b></button>
+      </div>
       <div class="container">
-       <div class="card">
-         <div class="card-body">
-           <ul id="confirmBooking"></ul>
+        
+       <div class="card p-2">
+         <div class="card-body" id="invoice">
+           <h2 class="text-center bg-secondary p-3 text-white">Confirm Booking Details</h2>
+           <ul id="confirmBooking" style="margin-left: 15px;"></ul>
+           <div class="card p-2">
+             <p><span style="color: red;">NOTE:</span> Before confirming this booking, make sure to download a pdf file will of this page or you can take a screenshot of this page or you can download it manually from the above button and this will be taken for future refferences. So keep this printed with you when you start your journey. And also you need to pay the full amount by cash in the main office before you start your journey.</p>
+           </div>
          </div>
-         <a href="/tourism.html">
-         <div class="btn-lg btn-success btn-block">CONFIRM BOOKING</div>
-        </a>
+         <div class="row">
+           <div class="col-lg-6 col-md-6 ">
+             <a href="thanksBooking.html" style="text-decoration: none;">
+              <button class="btn-lg btn-success btn-block ">CONFIRM BOOKING</button>
+            </a>
+           </div>
+           <div class="col-lg-6 col-md-6 " >
+              <button class="btn-lg btn-danger btn-block" onclick="cancel()">CANCEL BOOKING</button>
+           </div>
+          </div>
+        </div>
        </div>
       </div>
-    </section>
     <!--End of Hero-Image-->
 
   <script src="bookingAtrip.js"></script>
+  <script>
+   
+  </script>
 </body>
 </html>

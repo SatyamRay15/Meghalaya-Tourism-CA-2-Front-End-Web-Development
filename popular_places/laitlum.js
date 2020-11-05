@@ -17,10 +17,12 @@ const db = firebase.firestore();
 
 //Shillon Peak
 function Laitlum(){
+  var name = document.getElementById("name").value;
   var headingLaitlum = document.getElementById("reviewHeadingLaitlum").value;
   var contentLaitlum = document.getElementById("reviewContentLaitlum").value;
 
   db.collection("Laitlum").add({
+    name: name,
     heading: headingLaitlum,
     content: contentLaitlum ,
     createdAt: new Date()
@@ -40,15 +42,18 @@ const LaitlumPostList = document.querySelector('#laitlumreview-list');
 function renderReviewLaitlum(doc){
   let li = document.createElement('li');
   let laitlum = document.createElement('h6');
+  let name = document.createElement('h6');
   let headingLaitlum = document.createElement('b');
   let contentLaitlum = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
   laitlum.textContent = "Laitlum: ";
+  name.textContent = "Author Name: "+ doc.data().name;
   headingLaitlum.textContent ="Title: "+ doc.data().heading;
   contentLaitlum.textContent = doc.data().content;
 
   li.appendChild(laitlum);
+  li.appendChild(name);
   li.appendChild(headingLaitlum);
   li.appendChild(contentLaitlum);
 
@@ -56,13 +61,12 @@ function renderReviewLaitlum(doc){
 }
 
 db.collection('Laitlum').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewLaitlum(doc);
-    // totalReview(snapshot.docChanges());
     reviewLaitlum.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 

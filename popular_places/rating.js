@@ -17,10 +17,12 @@ var firebaseConfig = {
 
  //Living Root Bridge
 function review(){
+  var name = document.getElementById("name").value;
   var heading = document.getElementById("reviewHeading").value;
   var content = document.getElementById("reviewContent").value;
 
   db.collection("LivingRootBridgeReview").add({
+    name: name,
     heading: heading,
     content: content,
     createdAt: new Date()
@@ -38,15 +40,18 @@ const postList = document.querySelector('#review-list');
 function renderReviewLivingRootBridge(doc){
   let li = document.createElement('li');
   let livingrootbridge = document.createElement('h6');
+  let name = document.createElement('h6');
   let heading = document.createElement('b');
   let content = document.createElement('p');
 
   li.setAttribute('data-id',doc.id);
-  livingrootbridge.textContent = "Living Root Bridge:";
+  livingrootbridge.textContent = "Living Root Bridge";
+  name.textContent = "Author Name: "+ doc.data().name;
   heading.textContent ="Title: "+ doc.data().heading;
   content.textContent = doc.data().content;
 
   li.appendChild(livingrootbridge);
+  li.appendChild(name);
   li.appendChild(heading);
   li.appendChild(content);
 
@@ -54,13 +59,12 @@ function renderReviewLivingRootBridge(doc){
 }
 
 db.collection('LivingRootBridgeReview').get().then((snapshot)=>{
-  console.log(snapshot.docChanges());
+  // console.log(snapshot.docChanges());
   
   snapshot.docs.forEach(doc => {
     renderReviewLivingRootBridge(doc);
-    // totalReview(snapshot.docChanges());
     reviewRef.orderBy("createdAt","desc").limit(4);
-    console.log(doc.data());
+    // console.log(doc.data());
   })
 })
 
