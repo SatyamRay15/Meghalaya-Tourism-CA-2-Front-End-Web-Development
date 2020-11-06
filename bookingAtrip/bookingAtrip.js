@@ -25,7 +25,7 @@ function bookToConfirm(){
   var phoneNumber = document.getElementById("PNumber").value;
   var Email = document.getElementById("Email").value;
   var NoOfPeople = document.getElementById("NoOfPeople").value;
-  var totalAmount = NoOfPeople*1000;
+  var totalAmount = NoOfPeople*2000;
   var PaymentMethod = document.getElementById("payment_method").value;
 
   

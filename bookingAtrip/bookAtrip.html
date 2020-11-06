@@ -29,7 +29,7 @@
   </head>
 
   <!--Body Part-->
-  <body> 
+  <body style="background-image: url(/images/garo_tribes.jpg);"> 
 
     <!--Navbar-->
     
@@ -65,8 +65,7 @@
     <!--End of navbar-->
 
         <!-- <form>  -->
-          <div class="row" style="background-image: url(/images/golf_link_1.jpg);background-repeat: no-repeat;background-size: cover;">
-               
+          <div class="row">
             <div class="col-lg-8">
             <div class="container">
               <div class="card m-4">
@@ -75,7 +74,7 @@
                   <div><br>
                   <label for="place">Choose a place you want to visit in Meghalaya</label><br>
       
-                  <select name="visited_places" id="place" required>
+                  <select name="visited_places" id="place" onchange="bgChange()" required>
                     <!-- <option value="">Select</option> -->
                     <option value="">Select</option>
                     <option value="Dawki">Dawki</option>
@@ -180,7 +179,7 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="container" style="border: 2px solid black;">
-                    <p><span style="color: red;">NOTE:</span> Stay in Shillong of one person is Rs 1000/per day, including your Hotel charges, food, tourist place ticket and travelling fare. So the number of person you will add here, the price will be added accordingly.</p>
+                    <p><span style="color: red;">NOTE:</span> Stay in Shillong of one person is Rs 2000/per day, including your Hotel charges, food, tourist place ticket and travelling fare. So the number of person you will add here, the price will be added accordingly.</p>
                   </div>
                 </div>
                 </div>
@@ -211,6 +210,9 @@
     </div>
         </div> 
       </div>
+
+      
+
   <script src="bookingAtrip.js"></script>  
   <script>
     function validate(){
@@ -257,7 +259,58 @@
       }
     }
 
-    
+     //Background Picture for Select Module
+     function bgChange(){
+       var place = document.getElementById("place").value;
+       if(place == "Dawki"){
+    document.body.style.backgroundImage = "url('/images/meghalaya_tour_6.png')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  } else if(place == "Krangsuri Falls"){
+    document.body.style.backgroundImage = "url('/images/background_popular_places_1.jpg')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }else if(place=="Living Root Bridge"){
+    document.body.style.backgroundImage = "url('/images/background_popular_places.jpg')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }else if(place == "Laitlum Grand Canyon"){
+    document.body.style.backgroundImage = "url('/images/Laitlum-Copy.jpg')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }else if(place == "Shillong Peak"){
+    document.body.style.backgroundImage = "url('/images/shillong-peak.jpg')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }else if(place == "Umiam Lake"){
+    document.body.style.backgroundImage = "url('/images/hero2.jpg')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }else if(place == "Golf Link"){
+    document.body.style.backgroundImage = "url('/images/golf_link_1.jpg')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }else if(place == "Wards Lake"){
+    document.body.style.backgroundImage = "url('/images/wards_lake.JPG')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }else if(place == "Lady Hydra Park"){
+    document.body.style.backgroundImage = "url('/images/Lady_Hydari_Park.jpg')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }else if(place == "Donbosco Museum"){
+    document.body.style.backgroundImage = "url('/images/donbosco_museum_1.jpg')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }else if(place == "Donbosco Church"){
+    document.body.style.backgroundImage = "url('/images/don-bosco-church.jpg')";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+  }
+  else{
+    document.body.style.backgroundImage = "url(/images/festival_main.jfif)";
+  }
+}
   </script>
 </body>
 </html>
