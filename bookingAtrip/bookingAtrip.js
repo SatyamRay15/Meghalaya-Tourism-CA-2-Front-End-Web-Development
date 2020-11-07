@@ -124,6 +124,21 @@ function fun(){
 db.collection('BookingAsingleTrip').doc(local).onSnapshot(function(doc) {
     renderReviewConfirmBooking(doc);
   });
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log(user+"there is a user");
+      document.getElementById("logout").style.display = "block";
+      document.getElementById("login").style.display = "none";
+    } else {
+      // No user is signed in.
+      console.log("There is no user");
+      document.getElementById("login").style.display = "block";
+      document.getElementById("logout").style.display = "none";
+      document.location.href = "/tourism.html"
+    }
+  })
 }
 
 
@@ -205,4 +220,32 @@ function bgphoto(){
   else{
     document.body.style.backgroundImage = "url('/images/blog_cover_image.jpg')";
   }
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log(user+"there is a user");
+      document.getElementById("logout").style.display = "block";
+      document.getElementById("login").style.display = "none";
+    } else {
+      // No user is signed in.
+      console.log("There is no user");
+      document.getElementById("login").style.display = "block";
+      document.getElementById("logout").style.display = "none";
+      document.location.href = "/tourism.html"
+    }
+  }
+  )
+}
+
+function logout(){
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    alert("SignOut Successfull...");
+    location.reload();
+  }).catch(function(error) {
+    // An error happened.
+    alert(error+" This is error");
+    location.reload();
+  });
 }

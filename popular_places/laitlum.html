@@ -25,6 +25,9 @@
      <!--linking firebase for database-->
      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
      <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+
+     <script src="/popular_places/signout.js"></script>
  
      <style>
        ul#laitlumreview-list li{
@@ -61,7 +64,7 @@
             <a href="/tourism.html#popular_places" class="nav-link">Popular Places</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Services</a>
+            <a href="/services/services.html" class="nav-link">Services</a>
           </li>
           <li class="nav-item">
             <a href="/blog/blog.html" class="nav-link">Blog</a>
@@ -69,13 +72,21 @@
           <li class="nav-item">
             <a href="/contactUs/contact_us.html" class="nav-link">Contact Us</a>
           </li>
+          <li class="nav-item">
+            <a href="/signinAndsignout/signIn.html" style="text-decoration: none;">
+           <button style="width:auto;" class="btn-primary" id="login">Login</button>
+          </a>
+          </li>
+         <li class="nav-item">
+           <button style="width:auto;" class="btn-primary" id="logout" onclick="logout()">Logout</button>
+         </li>
         </ul>
       </div>
     </nav>
     <!--End of navbar-->
 
      <!--Hero-Image-->
-     <section class="hero-wrap" style="background-image: url('/images/Laitlum-Copy.jpg');">
+     <section class="hero-wrap" style="background-image: url('/images/Laitlum-Copy.jpg');height: 700px;">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters main-text align-items-center">
@@ -84,7 +95,7 @@
               <h1 class="mb-4 text-capitalize">Explore Laitlum
               </h1>
               <p style="font-size: 18px;">Book a trip to laitlum now to explore the grand canyon of Meghalaya.</p>
-              <a href="/bookingAtrip/bookAtrip.html" class="btn btn-hero py-2 px-3">Book Now</a>
+              <div class="btn btn-hero py-2 px-3" onclick="redirect()">Book Now</div>
             </div>
           </div>
         </div>

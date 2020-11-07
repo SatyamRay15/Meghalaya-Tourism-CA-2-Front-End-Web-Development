@@ -107,29 +107,6 @@ function renderReviewConfirmBooking(doc){
   ConfirmBookingList.appendChild(li);
 }
 
-// var y = function book();
-function fun(){
-   document.getElementById("download").addEventListener("click",()=>{
-    const invoice = this.document.getElementById("invoice");
-    // console.log(invoice+"This is invoice");
-    // console.log(window);
-    var opt = {
-      margin: 1,
-      filename: 'Booking_Refference.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-  };
-    html2pdf().from(invoice).set(opt).save();
-  })
-  var local = localStorage.getItem("DocumentId: ");
-  console.log(local+"This is also global variable");
-db.collection('BookingAfullTrip').doc(local).onSnapshot(function(doc) {
-    renderReviewConfirmBooking(doc);
-  });
-}
-
-
 
 function cancelBooking(){
   var deleteBooking = localStorage.getItem("DocumentId: ");
@@ -141,4 +118,16 @@ function cancelBooking(){
 }).catch(function(error) {
     console.error("Error removing document: ", error);
 });
+}
+
+function logout(){
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    alert("SignOut Successfull...");
+    location.reload();
+  }).catch(function(error) {
+    // An error happened.
+    alert(error+" This is error");
+    location.reload();
+  });
 }

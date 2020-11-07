@@ -25,11 +25,12 @@
       <!--linking firebase for database-->
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
 
   </head>
 
   <!--Body Part-->
-  <body style="background-image: url(/images/garo_tribes.jpg);" onload="func1()"> 
+  <body style="background-image: url(/images/garo_tribes.jpg);"> 
 
     <!--Navbar-->
     
@@ -44,13 +45,13 @@
       <!-- Navbar links -->
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a href="/tourism.html" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
             <a href="/tourism.html#popular_places" class="nav-link">Popular Places</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a href="#" class="nav-link">Services</a>
           </li>
           <li class="nav-item">
@@ -58,6 +59,14 @@
           </li>
           <li class="nav-item">
             <a href="/contactUs/contact_us.html" class="nav-link">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a href="/signinAndsignout/signIn.html" style="text-decoration: none;">
+           <button style="width:auto;" class="btn-primary" id="login">Login</button>
+          </a>
+          </li>
+          <li class="nav-item">
+            <button style="width:auto;" class="btn-primary" id="logout" onclick="logout()">Logout</button>
           </li>
         </ul>
       </div>
@@ -236,13 +245,30 @@
       }
     }
 
-  function func1(){
+    window.onload = function func1(){
     var s1 = localStorage.getItem("Heading");
     console.log(s1 + "This is s1");
     var s2 = localStorage.getItem("Price");
     console.log(s2+"This is s2");
     document.getElementById("head").innerHTML ="Booking for "+ s1;
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log(user+"there is a user");
+          document.getElementById("logout").style.display = "block";
+          document.getElementById("login").style.display = "none";
+        } else {
+          // No user is signed in.
+          console.log("There is no user");
+          document.getElementById("login").style.display = "block";
+          document.getElementById("logout").style.display = "none";
+          document.location.href= "bookingAfullTrip.html";
+        }
+      }
+      )
   }
+
 
   </script>
 </body>

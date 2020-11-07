@@ -22,18 +22,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-      <!--linking firebase for database-->
+    <!--linking firebase for database-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
 
-    <!--Linking HTML to PDF cdn link-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    
 
   </head>
 
   <!--Body Part-->
-  <body  onload="fun()"> 
+  <body style="background-image: url(/images/cancelled_cover.jpg);background-size: cover;height: 700;background-repeat: repeat;" onload="loadfun()"> 
 
     <!--Navbar-->
     
@@ -51,11 +51,12 @@
           <li class="nav-item">
             <a href="/tourism.html" class="nav-link">Home</a>
           </li>
+         
           <li class="nav-item">
             <a href="/tourism.html#popular_places" class="nav-link">Popular Places</a>
           </li>
-          <li class="nav-item  active">
-            <a href="#" class="nav-link">Services</a>
+          <li class="nav-item">
+            <a href="/services/services.html" class="nav-link">Services</a>
           </li>
           <li class="nav-item">
             <a href="/blog/blog.html" class="nav-link">Blog</a>
@@ -64,53 +65,64 @@
             <a href="/contactUs/contact_us.html" class="nav-link">Contact Us</a>
           </li>
           <li class="nav-item">
-            <a href="/signinAndsignout/signIn.html" style="text-decoration: none;">
            <button style="width:auto;" class="btn-primary" id="login">Login</button>
-          </a>
           </li>
          <li class="nav-item">
-           <button style="width:auto;" class="btn-primary" id="logout" onclick="logout()">Logout</button>
+           <button style="width:auto;" class="btn-primary" id="logout">Logout</button>
          </li>
         </ul>
       </div>
     </nav>
     <!--End of navbar-->
 
-
-       <!--Hero-Image-->
-     <div class="hero-wrap" style="background-image: url('/images/catholic-cathedral-shillong.jpg');">
-      <div class="overlay"></div>
-      <div class="card text-right">
-        <button class="btn btn-primary" id="download"><b>Download This File As PDF</b></button>
-      </div>
-      <div class="container">
-        
-       <div class="card p-2">
-         <div class="card-body" id="invoice">
-           <h2 class="text-center bg-secondary p-3 text-white">Confirm Booking Details</h2>
-           <ul id="confirmBooking" style="margin-left: 15px;"></ul>
-           <div class="card p-2">
-             <p><span style="color: red;">NOTE:</span> Before confirming this booking, make sure to download a pdf file will of this page or you can take a screenshot of this page or you can download it manually from the above button and this will be taken for future refferences. So keep this printed with you when you start your journey. And also you need to pay the full amount by cash in the main office before you start your journey.</p>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col-lg-6 col-md-6 ">
-             <a href="thanksBooking.html" style="text-decoration: none;">
-              <button class="btn-lg btn-success btn-block ">CONFIRM BOOKING</button>
-            </a>
-           </div>
-           <div class="col-lg-6 col-md-6 " >
-              <button class="btn-lg btn-danger btn-block" onclick="cancel()">CANCEL BOOKING</button>
-           </div>
-          </div>
+    <div class="container">
+      <div class="card p-3">
+        <div class="card-body p-3">
+          <div class="text-center h2 card p-3 bg-secondary text-white">SignIn Form</div><hr/>
+          <div class="row">
+            <div class="col-lg-12">
+          <label for="Email">Email</label>
+          <input type="email" class="form-control" id="Email" placeholder="Enter Your Email" required>
         </div>
-       </div>
+        </div>
+          <label for="Password">Password</label>
+          <input type="password" class="form-control" id="Password" placeholder="Enter Your Password" required>
+        <div class="btn btn-success btn-block" onclick="validatefun()">SignIn</div>
+        <div class="text-center p-3">
+          <h6><a href="signUp.html" style="text-decoration: none;"> Not a user? Register Here.</a></h6>
+        </div>
       </div>
-    <!--End of Hero-Image-->
-
-  <script src="bookingAtrip.js"></script>
+    </div>
+    <script src="/script.js"></script>
   <script>
-   
+    function validatefun(){
+    var Email =  document.getElementById("Email").value;
+    var Password = document.getElementById("Password").value;
+
+    if(Email == ""){
+      alert("Please fill up all the field before signing up. #Email field");
+      return;
+    }else if(Password == ""){
+      alert("Please fill up all the field before signing up. #Password field");
+      return;
+    }else{
+      signIn();
+      // alert("Successfully validated.");
+    }    
+  }
+  function loadfun(){
+    var user = firebase.auth().currentUser;
+      if (user) {
+        console.log(user+"there is a user");
+        document.getElementById("logout").style.display = "block";
+        document.getElementById("login").style.display = "none";
+      } else {
+        // No user is signed in.
+        console.log("There is no user");
+        document.getElementById("login").style.display = "block";
+        document.getElementById("logout").style.display = "none";
+      }
+    }
   </script>
 </body>
 </html>

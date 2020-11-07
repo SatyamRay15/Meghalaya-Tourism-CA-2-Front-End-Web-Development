@@ -1,56 +1,74 @@
- // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-//   var firebaseConfig = {
-//     apiKey: "AIzaSyCj9kam9Hgxdcpr7QgdPU1kX5_HcsoP4Ro",
-//     authDomain: "meghalaya-tourism.firebaseapp.com",
-//     databaseURL: "https://meghalaya-tourism.firebaseio.com",
-//     projectId: "meghalaya-tourism",
-//     storageBucket: "meghalaya-tourism.appspot.com",
-//     messagingSenderId: "896002054352",
-//     appId: "1:896002054352:web:e375f221e54dfddab266d5",
-//     measurementId: "G-PT4EBC1SH0"
-//   };
-//   // Initialize Firebase
-//   firebase.initializeApp(firebaseConfig);
-//   // firebase.analytics();
-//  const db = firebase.firestore();
-  // const auth = firebase.auth();
+//  Your web app's Firebase configuration
+//   For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyCj9kam9Hgxdcpr7QgdPU1kX5_HcsoP4Ro",
+    authDomain: "meghalaya-tourism.firebaseapp.com",
+    databaseURL: "https://meghalaya-tourism.firebaseio.com",
+    projectId: "meghalaya-tourism",
+    storageBucket: "meghalaya-tourism.appspot.com",
+    messagingSenderId: "896002054352",
+    appId: "1:896002054352:web:e375f221e54dfddab266d5",
+    measurementId: "G-PT4EBC1SH0"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  // firebase.analytics();
 
-  // function signup(){
-  //   var email = document.getElementById("email_1");
-  //   var password = document.getElementById("password_1");
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 
-  //   const promise = auth.createUserWithEmailAndPassword(email.value,password.value).then(cred => {
-  //     console.log(cred.user);
-  //     const modal = document.querySelector('#id02');
-  //     M.Modal.getInstance(modal).close();
+  function signUp(){
+    var fname = document.getElementById("FName").value;
+    var lname = document.getElementById("LName").value;
+    var email = document.getElementById("Email").value;
+    var password = document.getElementById("Password").value;
 
-  //   })
-  //   promise.catch(e => alert(e.message));
+    const promise = auth.createUserWithEmailAndPassword(email,password).then(cred => {
+      console.log(cred.user);
+      alert("Signed Up");
+      document.location.href="/tourism.html";
+    })
+    promise.catch(e => alert(e.message));
 
-  //   alert("Signed Up");
-  // }
+    db.collection("UserDetails").add({
+      firstName: fname,
+      lastName: lname,
+      email: email,
+      createdAt: new Date()
+    }).then(function(docRef){
+      console.log("Data added successfully");
+    }).catch(function(error){
+      console.error("Error adding your review: ", error);
+    });
+}
 
-  // function signIn(){
-  //   var email = document.getElementById("email");
-  //   var password = document.getElementById("password");
+  function signIn(){
+    var email = document.getElementById("Email").value;
+    var password = document.getElementById("Password").value;
 
-  //   const promise_1 = auth.signInUserWithEmailAndPassword(email.value,password.value).then(cred => {
-  //     console.log(cred);
-  //     const modal = document.querySelector('#id01');
-  //     M.Modal.getInstance(modal).close();
+    const promise = auth.signInWithEmailAndPassword(email,password).then(cred => {
+      console.log(cred);
+      alert("Signed In Successfully... ");
+      document.location.href="/tourism.html";
+    })
+    promise.catch(e => {
+      alert(e.message);
+      // location.reload();
+    });
+    // location.reload();
+  }
 
-  //   })
-  //   promise_1.catch(e => alert(e.message));
+  function logout(){
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      alert("SignOut Successfull...");
+      location.reload();
+    }).catch(function(error) {
+      // An error happened.
+      alert(error+" This is error");
+      location.reload();
+    });
+  }
 
-  //   alert("Signed In" + email);
-  // }
-
-  // function logout(){
-  //   auth.signOut();
-
-  //   signout.catch(e => alert(e.message));
-
-  //   alert("Sign Out Success!!!");
-  // }
-
+  
+  

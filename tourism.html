@@ -28,12 +28,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
 
-    
 
   </head>
 
   <!--Body Part-->
-  <body> 
+  <body onload="loadfun()"> 
 
     <!--Navbar-->
     
@@ -56,7 +55,7 @@
             <a href="#popular_places" class="nav-link">Popular Places</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Services</a>
+            <a href="/services/services.html" class="nav-link">Services</a>
           </li>
           <li class="nav-item">
             <a href="blog/blog.html" class="nav-link">Blog</a>
@@ -65,82 +64,26 @@
             <a href="contactUs/contact_us.html" class="nav-link">Contact Us</a>
           </li>
           <li class="nav-item">
-           
-            <button onclick="document.getElementById('modal1').style.display='block'" style="width:auto;" class="btn-primary" id="login">Login</button>
-         
-            <!--SignIn Form-->
-            <div id="modal1" class="modal">
-              <div class="modal-content animate">
-              <form id="login-form">
-                <div class="imgcontainer">
-                  <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">&times;</span>
-                </div>
-            
-                <div class="container">
-                  <label ><b>Email</b></label>
-                  <input type="text" placeholder="Enter your email" name="email" id="email" required>
-            
-                  <label ><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="password" id="password" required>
-                    
-                  <button type="submit" class="btn-block" onclick="signIn()">Login</button>
-                </div>
-            
-                <div class="container" style="background-color:#f1f1f1">
-                  <button type="button" onclick="document.getElementById('modal1').style.display='none'" class="cancelbtn">Cancel</button>
-                  <span class="psw"><button onclick="document.getElementById('id02').style.display='block',document.getElementById('modal1').style.display='none'">Not a member? Register Now</button></span>
-                </div>
-              </form>
-            </div>
-            </div>
-
-            <!--SignUp Form-->
-            <div id="id02" class="modal">
-              <div class="modal-content animate">
-              <form id="signup-form">
-                <div class="imgcontainer">
-                  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-                </div>
-            
-                <div class="container">
-                  <label ><b>Name</b></label>
-                  <input type="text" placeholder="Enter your full name" name="name" id="name" required>
-                  <label ><b>Email</b></label>
-                  <input type="text" placeholder="Enter your email" name="email" id="email_1" required>
-            
-                  <label ><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="password" id="password_1" required>
-                    
-                  <button type="submit" class="btn-block" onclick="signup()">SignUp</button>
-                </div>
-            
-                <div class="container" style="background-color:#f1f1f1">
-                  <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-                  <span class="psw"><button onclick="document.getElementById('id01').style.display='block',document.getElementById('id02').style.display='none'">SignIn</button></span>
-                </div>
-              </form>
-            </div>
-            </div>
+            <a href="signinAndsignout/signIn.html" style="text-decoration: none;">
+           <button style="width:auto;" class="btn-primary" id="login">Login</button>
+          </a>
           </li>
-          
-          <li class="nav-item">
-           
-            <button onclick="logout()" style="width:auto;" class="btn-primary" id="logout">Logout</button>
+         <li class="nav-item">
+           <button style="width:auto;" class="btn-primary" id="logout" onclick="logout()">Logout</button>
          </li>
-          
         </ul>
       </div>
     </nav>
     <!--End of navbar-->
 
     <!--Hero-Image-->
-    <section class="hero-wrap" style="background-image: url('images/Meghalaya\ \(2\).jpg');">
+    <section class="hero-wrap" style="background-image: url('images/Meghalaya\ \(2\).jpg');height: 700px;">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters main-text align-items-center">
           <div class="col-lg-9 col-md-6 d-flex align-items-end">
             <div class="text">
-              <h1 class="mb-4 text-capitalize">find a perfect deal<br>for your next trip
+              <h1 class="mt-4 text-capitalize">find a perfect deal<br>for your next trip
               </h1>
               <a href="bookingAfullTrip/bookingAfullTrip.html" class="btn btn-hero py-3 px-3">View All Deals</a>
             </div>
@@ -152,7 +95,7 @@
       </div>
     </section>
     <!--End of Hero-Image-->
-
+    <hr/>
    
 
   <!--Welcome/about section-->
@@ -513,29 +456,26 @@
 </footer>
 <!--End Of Footer Section-->
 
-<!--script import in this section-->
-<script src="script.js"></script>
-
-<script>
-   // Get the modal
- var modal = document.getElementById('modal1');
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+  <!--script import in this section-->
+  <script src="script.js"></script>
+  <script>
+    function loadfun(){
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log(user+"there is a user");
+          document.getElementById("logout").style.display = "block";
+          document.getElementById("login").style.display = "none";
+        } else {
+          // No user is signed in.
+          console.log("There is no user");
+          document.getElementById("login").style.display = "block";
+          document.getElementById("logout").style.display = "none";
         }
-    }
+});
+  }
 
-      // Get the modal
- var modal = document.getElementById('id02');
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
+  </script> 
+
   </body>
 </html>

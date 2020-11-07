@@ -25,11 +25,11 @@
     <!--linking firebase for database-->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script> 
 
     <!--script import in this section-->
-<script src="/script.js"></script>
+<!-- <script src="/script.js"></script> -->
 <script src="create.js"></script>
 <style>
   ul#post-list li{
@@ -85,75 +85,22 @@
           <a href="/tourism.html#popular_places" class="nav-link">Popular Places</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">Services</a>
+          <a href="/services/services.html" class="nav-link">Services</a>
         </li>
         <li class="nav-item active">
-          <a href="#" class="nav-link">Blog</a>
+          <a href="blog.html" class="nav-link">Blog</a>
         </li>
         <li class="nav-item">
           <a href="/contactUs/contact_us.html" class="nav-link">Contact Us</a>
         </li>
         <li class="nav-item">
-         
-          <button onclick="document.getElementById('modal1').style.display='block'" style="width:auto;" class="btn-primary" >Login</button>
-       
-          <!--SignIn Form-->
-          <div id="modal1" class="modal">
-            <div class="modal-content animate">
-            <form id="login-form">
-              <div class="imgcontainer">
-                <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">&times;</span>
-              </div>
-          
-              <div class="container">
-                <label ><b>Email</b></label>
-                <input type="text" placeholder="Enter your email" name="email" id="email" required>
-          
-                <label ><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" id="password" required>
-                  
-                <button type="submit" class="btn-block" onclick="signIn()">Login</button>
-              </div>
-          
-              <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('modal1').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw"><button onclick="document.getElementById('id02').style.display='block',document.getElementById('modal1').style.display='none'">Not a member? Register Now</button></span>
-              </div>
-            </form>
-          </div>
-          </div>
-
-          <!--SignUp Form-->
-          <div id="id02" class="modal">
-            <div class="modal-content animate">
-            <form id="signup-form">
-              <div class="imgcontainer">
-                <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-              </div>
-          
-              <div class="container">
-                <label ><b>Name</b></label>
-                <input type="text" placeholder="Enter your full name" name="name" id="name" required>
-                <label ><b>Email</b></label>
-                <input type="text" placeholder="Enter your email" name="email" id="email_1" required>
-          
-                <label ><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" id="password_1" required>
-                  
-                <button type="submit" class="btn-block" onclick="signup()">SignUp</button>
-              </div>
-          
-              <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw"><button onclick="document.getElementById('modal1').style.display='block',document.getElementById('id02').style.display='none'">SignIn</button></span>
-              </div>
-            </form>
-          </div>
-          </div>
+          <a href="/signinAndsignout/signIn.html" style="text-decoration: none;">
+         <button style="width:auto;" class="btn-primary" id="login">Login</button>
+        </a>
         </li>
-        
-          
-        
+       <li class="nav-item">
+         <button style="width:auto;" class="btn-primary" id="logout" onclick="logout()">Logout</button>
+       </li>
       </ul>
     </div>
   </nav>
@@ -169,7 +116,7 @@
               <h1 class="mb-4 text-capitalize">Write your own experience in Meghalaya
               </h1>
               <p style="font-size: 18px;">Life is all about creating and living experiences that are worth sharing.</p>
-              <a href="create.html" class="btn btn-hero py-2 px-3">Write Blog</a>
+              <div class="btn btn-hero py-2 px-3" onclick="redirect()">Write Blog</div>
             </div>
           </div>
         </div>
@@ -177,8 +124,12 @@
     </section>
     <!--End of Hero-Image-->
 
-   
-
+   <div class="card p-2">
+     <div class="card-body bg-secondary text-white text-center" style="border-radius: 5px;">
+      <h2>Blog Posts</h2>
+     </div>
+   </div>
+    
       <div class="container">
         <ul id="post-list"></ul>
         </div>
@@ -251,28 +202,36 @@
   <script>
 
 const postList = document.querySelector('#post-list');
-    // Get the modal
-  var modal = document.getElementById('modal1');
-     
-     // When the user clicks anywhere outside of the modal, close it
-     window.onclick = function(event) {
-         if (event.target == modal) {
-             modal.style.display = "none";
-         }
-     }
- 
-       // Get the modal
-  var modal = document.getElementById('id02');
-     
-     // When the user clicks anywhere outside of the modal, close it
-     window.onclick = function(event) {
-         if (event.target == modal) {
-             modal.style.display = "none";
-         }
-     }
 
-     //Add the data to the webpage
 
+window.onload = function loadfun(){
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log(user+"there is a user");
+          document.getElementById("logout").style.display = "block";
+          document.getElementById("login").style.display = "none";
+        } else {
+          // No user is signed in.
+          console.log("There is no user");
+          document.getElementById("login").style.display = "block";
+          document.getElementById("logout").style.display = "none";
+        }
+      }
+      )}
+
+      function redirect(){
+        var user = firebase.auth().currentUser;
+
+            if (user) {
+              // User is signed in.
+              document.location.href = "create.html";
+            } else {
+              // No user is signed in.
+              alert("You need to register or login before booking.");
+              document.location.href = "/signinAndsignout/signIn.html";
+            }
+      }
 
  </script>
 </body>

@@ -16,6 +16,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+     <!--linking firebase for database-->
+     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+
+     
+    <!--linking fontawesome link-->
+    <script src="https://kit.fontawesome.com/1c15c31927.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -49,63 +58,13 @@
               <a href="contact_us.html" class="nav-link">Contact Us</a>
             </li>
             <li class="nav-item">
-         
-              <button onclick="document.getElementById('modal1').style.display='block'" style="width:auto;" class="btn-primary" >Login</button>
-           
-              <!--SignIn Form-->
-              <div id="modal1" class="modal">
-                <div class="modal-content animate">
-                <form id="login-form">
-                  <div class="imgcontainer">
-                    <span onclick="document.getElementById('modal1').style.display='none'" class="close" title="Close Modal">&times;</span>
-                  </div>
-              
-                  <div class="container">
-                    <label ><b>Email</b></label>
-                    <input type="text" placeholder="Enter your email" name="email" id="email" required>
-              
-                    <label ><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="password" id="password" required>
-                      
-                    <button type="submit" class="btn-block" onclick="signIn()">Login</button>
-                  </div>
-              
-                  <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('modal1').style.display='none'" class="cancelbtn">Cancel</button>
-                    <span class="psw"><button onclick="document.getElementById('id02').style.display='block',document.getElementById('modal1').style.display='none'">Not a member? Register Now</button></span>
-                  </div>
-                </form>
-              </div>
-              </div>
-    
-              <!--SignUp Form-->
-              <div id="id02" class="modal">
-                <div class="modal-content animate">
-                <form id="signup-form">
-                  <div class="imgcontainer">
-                    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-                  </div>
-              
-                  <div class="container">
-                    <label ><b>Name</b></label>
-                    <input type="text" placeholder="Enter your full name" name="name" id="name" required>
-                    <label ><b>Email</b></label>
-                    <input type="text" placeholder="Enter your email" name="email" id="email_1" required>
-              
-                    <label ><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="password" id="password_1" required>
-                      
-                    <button type="submit" class="btn-block" onclick="signup()">SignUp</button>
-                  </div>
-              
-                  <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-                    <span class="psw"><button onclick="document.getElementById('modal1').style.display='block',document.getElementById('id02').style.display='none'">SignIn</button></span>
-                  </div>
-                </form>
-              </div>
-              </div>
+              <a href="/signinAndsignout/signIn.html" style="text-decoration: none;">
+             <button style="width:auto;" class="btn-primary" id="login">Login</button>
+            </a>
             </li>
+           <li class="nav-item">
+             <button style="width:auto;" class="btn-primary" id="logout" onclick="logout()">Logout</button>
+           </li>
           </ul>
         </div>
       </nav>
@@ -188,7 +147,26 @@
   <!-- Copyright -->
 </footer>
 <!--End Of Footer Section-->
-
+<script src="/script.js"></script>
+<script>
+  
+  window.onload = function loadfun(){
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log(user+"there is a user");
+          document.getElementById("logout").style.display = "block";
+          document.getElementById("login").style.display = "none";
+        } else {
+          // No user is signed in.
+          console.log("There is no user");
+          document.getElementById("login").style.display = "block";
+          document.getElementById("logout").style.display = "none";
+        }
+      }
+      )
+    }
+</script>
 </body>
 
 </html>

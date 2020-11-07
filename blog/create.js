@@ -42,7 +42,6 @@ db.collection("posts").add({
 }); 
 }
 
-
 //create element and render post
 function renderPost(doc){
   let li = document.createElement('li');
@@ -77,5 +76,17 @@ db.collection('posts').get().then((snapshot)=>{
 })
 
 var postRef = db.collection("posts");
+
+function logout(){
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    alert("SignOut Successfull...");
+    location.reload();
+  }).catch(function(error) {
+    // An error happened.
+    alert(error+" This is error");
+    location.reload();
+  });
+}
 
 

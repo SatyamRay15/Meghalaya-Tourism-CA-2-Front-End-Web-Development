@@ -25,6 +25,7 @@
       <!--linking firebase for database-->
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
 
   </head>
   <style>
@@ -68,13 +69,13 @@
       <!-- Navbar links -->
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a href="/tourism.html" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
             <a href="/tourism.html#popular_places" class="nav-link">Popular Places</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a href="#" class="nav-link">Services</a>
           </li>
           <li class="nav-item">
@@ -83,6 +84,14 @@
           <li class="nav-item">
             <a href="/contactUs/contact_us.html" class="nav-link">Contact Us</a>
           </li>
+          <li class="nav-item">
+            <a href="/signinAndsignout/signIn.html" style="text-decoration: none;">
+           <button style="width:auto;" class="btn-primary" id="login">Login</button>
+          </a>
+          </li>
+         <li class="nav-item">
+           <button style="width:auto;" class="btn-primary" id="logout" onclick="logout()">Logout</button>
+         </li>
         </ul>
       </div>
     </nav>
@@ -117,35 +126,35 @@
                   <td><span class="lato-bold mtop-5 txt-cap txt-center"><i class="rs ">Rs </i>14,999</span></td>
                   <td>2 Nights</td>
                   <td>  Meals, Accommodation, Transfer, Sightseeing </td>
-                  <td><button class="btn btn-danger btn-fixed" onclick="fun1()"><a href="bookNow.html" style="text-decoration: none;color: white;">Book Now</a></button></td>
+                  <td><button class="btn btn-danger btn-fixed" onclick="fun1()">Book Now</button></td>
               </tr>
               <tr>
                   <td>Discover Meghalaya</td>
                   <td><span class="lato-bold mtop-5 txt-cap txt-center"><i class="rs ">Rs </i>21,999</span></td>
                   <td>3 Nights</td>
                   <td>  Meals, Accommodation, Transfer, Sightseeing </td>
-                  <td><button class="btn btn-danger" onclick="fun2()"><a href="bookNow.html" style="text-decoration: none;color: white;">Book Now</a></button></td>
+                  <td><button class="btn btn-danger" onclick="fun2()">Book Now</button></td>
               </tr>
               <tr>
                   <td>Amazing Cherrapunji &amp; Shillong</td>
                   <td><span class="lato-bold mtop-5 txt-cap txt-center"><i class="rs ">Rs </i>26,999</span></td>
                   <td>4 Nights</td>
                   <td>  Meals, Accommodation, Transfer, Sightseeing </td>
-                  <td><button class="btn btn-danger" onclick="fun3()"><a href="bookNow.html" style="text-decoration: none;color: white;">Book Now</a></button></td>
+                  <td><button class="btn btn-danger" onclick="fun3()">Book Now</button></td>
               </tr>
               <tr>
                   <td>Mesmerizing  Meghalaya With Cherrapunji &amp; Dawki</td>
                   <td><span class="lato-bold mtop-5 txt-cap txt-center"><i class="rs ">Rs </i>16,800</span></td>
                   <td>5 Nights</td>
                   <td> Meals, Accommodation, Transfer, Sightseeing </td>
-                  <td><button class="btn btn-danger" onclick="fun4()"><a href="bookNow.html" style="text-decoration: none;color: white;">Book Now</a></button></td>
+                  <td><button class="btn btn-danger" onclick="fun4()">Book Now</button></td>
               </tr>
               <tr>
                   <td>Shillong &amp; Kaziranga Tour</td>
                   <td><span class="lato-bold mtop-5 txt-cap txt-center"><i class="rs ">Rs </i>30,375</span></td>
                   <td>6 Nights</td>
                   <td> Meals, Accommodation, Transfer, Sightseeing </td>
-                  <td><button class="btn btn-danger" onclick="fun5()"><a href="bookNow.html" style="text-decoration: none;color: white;">Book Now</a></button></td>
+                  <td><button class="btn btn-danger" onclick="fun5()">Book Now</button></td>
               </tr>
           </tbody>
         </table>
@@ -217,7 +226,7 @@
 </footer>
 <!--End Of Footer Section-->
 
-   
+   <script src="bookAfullTrip.js"></script>
     <script>
       function readMore(){
         var dots = document.getElementById("dots");
@@ -237,9 +246,21 @@
 
       function fun1(){
         var Book1 = "Mystic Meghalaya";
-        var Price1 = 14999 ; 
+        var Price1 = 14999; 
         localStorage.setItem("Heading", Book1);
-        localStorage.setItem("Price", Price);
+        localStorage.setItem("Price", Price1);
+        console.log("LocalStorage Added Successfully.");
+        
+        var user = firebase.auth().currentUser;
+
+          if (user) {
+            // User is signed in.
+            document.location.href = "bookNow.html";
+          } else {
+            // No user is signed in.
+            alert("You need to register or login before booking.");
+            document.location.href = "/signinAndsignout/signIn.html";
+          }
       }
 
       function fun2(){
@@ -247,6 +268,18 @@
         var Price2 = 21999;
         localStorage.setItem("Heading",Book2);
         localStorage.setItem("Price",Price2);
+        console.log("LocalStorage Added Successfully.");
+        
+        var user = firebase.auth().currentUser;
+
+              if (user) {
+                // User is signed in.
+                document.location.href = "bookNow.html";
+              } else {
+                // No user is signed in.
+                alert("You need to register or login before booking.");
+                document.location.href = "/signinAndsignout/signIn.html";
+              }
       }
 
       function fun3(){
@@ -254,6 +287,18 @@
         var Price3 = 26999;
         localStorage.setItem("Heading",Book3);
         localStorage.setItem("Price",Price3);
+        console.log("LocalStorage Added Successfully.");
+        
+        var user = firebase.auth().currentUser;
+
+            if (user) {
+              // User is signed in.
+              document.location.href = "bookNow.html";
+            } else {
+              // No user is signed in.
+              alert("You need to register or login before booking.");
+              document.location.href = "/signinAndsignout/signIn.html";
+            }
       }
 
       function fun4(){
@@ -261,6 +306,18 @@
         var Price4 = 16800;
         localStorage.setItem("Heading",Book4);
         localStorage.setItem("Price",Price4);
+        console.log("LocalStorage Added Successfully.");
+        
+        var user = firebase.auth().currentUser;
+
+            if (user) {
+              // User is signed in.
+              document.location.href = "bookNow.html";
+            } else {
+              // No user is signed in.
+              alert("You need to register or login before booking.");
+              document.location.href = "/signinAndsignout/signIn.html";
+            }
       }
 
       function fun5(){
@@ -268,9 +325,37 @@
         var Price5 = 30375;
         localStorage.setItem("Heading",Book5);
         localStorage.setItem("Price",Price5);
+        console.log("LocalStorage Added Successfully.");
+        
+        var user = firebase.auth().currentUser;
+
+            if (user) {
+              // User is signed in.
+              document.location.href = "bookNow.html";
+            } else {
+              // No user is signed in.
+              alert("You need to register or login before booking.");
+              document.location.href = "/signinAndsignout/signIn.html";
+            }
       }
 
       
+
+      window.onload = function loadfun(){
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          console.log(user+"there is a user");
+          document.getElementById("logout").style.display = "block";
+          document.getElementById("login").style.display = "none";
+        } else {
+          // No user is signed in.
+          console.log("There is no user");
+          document.getElementById("login").style.display = "block";
+          document.getElementById("logout").style.display = "none";
+        }
+      }
+      )}
     </script>
 
 </body>

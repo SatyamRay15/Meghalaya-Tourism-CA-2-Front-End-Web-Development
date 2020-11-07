@@ -25,6 +25,7 @@
     <!--linking firebase for database-->
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
 
     <style>
       ul#dawkireview-list li{
@@ -39,7 +40,7 @@
   </head>
 
   <!--Body Part-->
-  <body> 
+  <body onload="loadfun()"> 
 
     <!--Navbar-->
     
@@ -54,14 +55,14 @@
       <!-- Navbar links -->
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a href="/tourism.html" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
             <a href="/tourism.html#popular_places" class="nav-link">Popular Places</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Services</a>
+            <a href="/services/services.html" class="nav-link">Services</a>
           </li>
           <li class="nav-item">
             <a href="/blog/blog.html" class="nav-link">Blog</a>
@@ -69,13 +70,21 @@
           <li class="nav-item">
             <a href="/contactUs/contact_us.html" class="nav-link">Contact Us</a>
           </li>
+          <li class="nav-item">
+            <a href="/signinAndsignout/signIn.html" style="text-decoration: none;">
+           <button style="width:auto;" class="btn-primary" id="login">Login</button>
+          </a>
+          </li>
+         <li class="nav-item">
+           <button style="width:auto;" class="btn-primary" id="logout" onclick="logout()">Logout</button>
+         </li>
         </ul>
       </div>
     </nav>
     <!--End of navbar-->
 
      <!--Hero-Image-->
-     <section class="hero-wrap" style="background-image: url('/images/meghalaya_tour_6.png');">
+     <section class="hero-wrap" style="background-image: url('/images/meghalaya_tour_6.png');height: 700px;">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters main-text align-items-center p-3">
@@ -84,7 +93,7 @@
               <h1 class="mb-4 text-capitalize">Explore Dawki
               </h1>
               <p style="font-size: 18px;">Book a trip to dawki now to explore crystal clear water.</p>
-              <a href="/bookingAtrip/bookAtrip.html" class="btn btn-hero py-2 px-3">Book Now</a>
+              <div class="btn btn-hero py-2 px-3" onclick="redirect()">Book Now</div>
             </div>
           </div>
         </div>
@@ -228,7 +237,6 @@
 
 
       <script src="dawki.js"></script>
-
       <script>
         function validate(){
            var name = document.getElementById("name").value;
@@ -248,8 +256,9 @@
             dawki();
           }
         }  
+
         </script>
-        
+        <script src="/popular_places/signout.js"></script>
 
     </body>
 </html>
